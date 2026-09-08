@@ -1,0 +1,31 @@
+"""Builds the grounded-answer prompt: numbered context excerpts + an
+instruction to cite every claim and refuse when the context is insufficient.
+This is what Phase 5's faithfulness/grounding scoring checks against."""
+
+SYSTEM_PROMPT = (
+    "You are a financial research assistant analyzing SEC 10-K filings. "
+    "Answer the user's question using ONLY the information in the numbered "
+    "context excerpts below. Every claim in your answer must be supported by "
+    "at least one excerpt, cited inline using plain ASCII square brackets "
+    "like [1] or [2][3] -- for example: 'Revenue grew 8% [1].' Do not use "
+    "any other bracket style (no full-width or CJK brackets). "
+    "If the excerpts do not contain enough information to answer the "
+    "question, say so explicitly rather than guessing or using outside "
+    "knowledge."
+)
+
+
+def build_prompt(question: str, excerpts: list[dict]) -> str:
+    """excerpts: list of {ticker, filing_date, item_section, text}, in the
+    same order they'll be cited by (1-indexed)."""
+    lines = ["Context excerpts:", ""]
+    for i, ex in enumerate(excerpts, 1):
+        header = f"[{i}] ({ex['ticker']}, {ex['filing_date']}, {ex['item_section']})"
+        lines.append(header)
+        lines.append(ex["text"])
+        lines.append("")
+
+    lines.append(f"Question: {question}")
+    lines.append("")
+    lines.append("Answer the question using only the context above, with inline citations like [1].")
+    return "\n".join(lines)

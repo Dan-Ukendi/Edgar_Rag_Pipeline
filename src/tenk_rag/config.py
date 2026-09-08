@@ -36,11 +36,34 @@ class VectorStoreConfig(BaseModel):
     local_path: str = "data/processed/qdrant_local"
 
 
+class GroqLLMConfig(BaseModel):
+    model: str = "openai/gpt-oss-120b"
+    max_tokens: int = Field(1024, gt=0)
+
+
+class LocalLLMConfig(BaseModel):
+    model: str = "llama3.2:3b"
+    base_url: str = "http://localhost:11434"
+    max_tokens: int = Field(1024, gt=0)
+
+
+class LLMConfig(BaseModel):
+    backend: Literal["groq", "local"] = "groq"
+    groq: GroqLLMConfig = GroqLLMConfig()
+    local: LocalLLMConfig = LocalLLMConfig()
+
+
+class RetrievalConfig(BaseModel):
+    top_k: int = Field(5, gt=0)
+
+
 class PipelineConfig(BaseModel):
     raw_data_dir: str = "data/raw"
     chunking: ChunkingConfig = ChunkingConfig()
     embedding: EmbeddingConfig = EmbeddingConfig()
     vector_store: VectorStoreConfig = VectorStoreConfig()
+    llm: LLMConfig = LLMConfig()
+    retrieval: RetrievalConfig = RetrievalConfig()
 
     @classmethod
     def from_yaml(cls, path: str | Path) -> "PipelineConfig":

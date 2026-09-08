@@ -6,6 +6,8 @@ Usage:
 
 import sys
 
+sys.stdout.reconfigure(encoding="utf-8")
+
 from tenk_rag.config import PipelineConfig
 from tenk_rag.embeddings.local import SentenceTransformerEmbedder
 from tenk_rag.store.qdrant_store import QdrantStore

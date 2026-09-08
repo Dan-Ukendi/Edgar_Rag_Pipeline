@@ -4,11 +4,18 @@ Benchmarked RAG pipeline for SEC 10-K filings — configurable chunking/embeddin
 
 ## Status
 
-Phase 1 (core retrieval pipeline) complete. See project plan for the full phase breakdown.
+Phase 2 (answer generation) complete. See project plan for the full phase breakdown.
 
 **Known corpus/parsing characteristics** (found during manual testing, worth remembering when writing eval questions in Phase 5):
 - Item-section tags on chunks are a best-effort heuristic (nearest preceding "Item N" heading). Some filings place their full financial statements or extended risk discussion in an appendix after their last numbered Item, so those chunks inherit that Item's label rather than the semantically obvious one (e.g. financial statements tagged "Item 16" in one filing). Retrieved *content* is still correct in these cases — only the section label is approximate.
 - Items 11-14 (executive compensation, ownership, related-party transactions, accountant fees) are typically just "incorporated by reference to the Proxy Statement" boilerplate with no real data — a 10-K corpus limitation, not a pipeline bug. Avoid eval questions targeting those topics.
+- Some open-weight models (observed on Groq's `openai/gpt-oss-120b`) will use CJK-style brackets (`【1】`) instead of ASCII `[1]` for citations despite explicit instructions. The prompt now spells out "plain ASCII square brackets" with an example, and citation parsing accepts both bracket styles as a safety net.
+
+## LLM backends
+
+Two interchangeable backends behind one `LLMClient` interface, selectable via `llm.backend` in `configs/pipeline.yaml` or `--backend=groq|local` on `scripts/ask.py`:
+- **groq** (hosted, free tier) — `openai/gpt-oss-120b` via the Groq API. Needs a free `GROQ_API_KEY` from console.groq.com in a local `.env` file (gitignored).
+- **local** — Ollama running in Docker, `llama3.2:3b`. No API key, fully offline, but noticeably slower on CPU and less consistent about citation formatting than the hosted model.
 
 ## Corpus
 
@@ -32,6 +39,15 @@ docker run -d -p 6333:6333 -p 6334:6334 \
   -v tenk_rag_qdrant_storage:/qdrant/storage qdrant/qdrant   # start the vector store
 uv run scripts/build_index.py             # parse -> chunk -> embed -> index
 uv run scripts/query_index.py "What are Apple's main risk factors?" AAPL 3
+
+# LLM backends
+echo "GROQ_API_KEY=your-key-here" > .env       # free key from console.groq.com
+docker run -d -p 11434:11434 \
+  -v tenk_rag_ollama_data:/root/.ollama ollama/ollama   # local backend (optional)
+docker exec <ollama-container-name> ollama pull llama3.2:3b
+
+uv run scripts/ask.py "What are Apple's main risk factors?" AAPL --backend=groq
+uv run scripts/ask.py "What are Apple's main risk factors?" AAPL --backend=local
 ```
 
 ## Structure
@@ -45,14 +61,23 @@ src/tenk_rag/
 ├── embeddings/
 │   ├── base.py             # EmbeddingModel interface
 │   └── local.py             # sentence-transformers backend
-└── store/
-    └── qdrant_store.py       # Qdrant collection management, upsert, query
+├── store/
+│   └── qdrant_store.py       # Qdrant collection management, upsert, query
+├── llm/
+│   ├── base.py                # LLMClient interface
+│   ├── groq_client.py          # hosted (free tier) backend
+│   ├── ollama_client.py         # local backend
+│   └── factory.py                # builds the configured backend
+└── generation/
+    ├── prompt.py                # grounded-answer prompt (forces inline citations)
+    └── answer.py                  # orchestration + citation parsing
 
-configs/pipeline.yaml     # chunk size/overlap, embedding model, vector store settings
+configs/pipeline.yaml     # chunk size/overlap, embedding model, vector store, LLM settings
 scripts/
 ├── fetch_filings.py       # download filings from SEC EDGAR
 ├── build_index.py          # run the full ingest pipeline
-└── query_index.py          # manually query the index and inspect results
+├── query_index.py           # manually query the index and inspect results
+└── ask.py                    # end-to-end: retrieve -> generate a grounded, cited answer
 data/raw/                 # downloaded filings (gitignored, reproducible via fetch script)
 data/processed/           # generated artifacts (gitignored)
 tests/                    # test suite
