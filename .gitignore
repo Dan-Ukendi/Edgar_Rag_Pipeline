@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+build/
+dist/
+
+# uv
+.python-version.local
+
+# Data (fetched/generated, not committed)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Env
+.env
+
+# Editors
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
