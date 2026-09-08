@@ -15,6 +15,12 @@ import requests
 COMPANIES = ["AAPL", "JPM", "XOM", "JNJ", "WMT", "TSLA"]
 EDGAR_CONTACT = "Dan Ukendi dan.ukendi1@gmail.com"
 
+# SEC's ticker->CIK map currently points XOM at "ExxonMobil Holdings Corp"
+# (CIK 2115436), a newer shell entity with no 10-K filed yet. The actual
+# operating company that files 10-Ks is still "EXXON MOBIL CORP" (CIK
+# 34088), so we override the lookup for this one ticker.
+CIK_OVERRIDES = {"XOM": "34088"}
+
 TICKERS_URL = "https://www.sec.gov/files/company_tickers.json"
 SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik:0>10}.json"
 ARCHIVE_URL = "https://www.sec.gov/Archives/edgar/data/{cik}/{accession_no_dashes}/{document}"
@@ -73,7 +79,7 @@ def main() -> None:
     ticker_to_cik = build_ticker_to_cik(session)
 
     for ticker in COMPANIES:
-        cik = ticker_to_cik.get(ticker)
+        cik = CIK_OVERRIDES.get(ticker, ticker_to_cik.get(ticker))
         if cik is None:
             print(f"[skip] {ticker}: not found in EDGAR ticker map")
             continue

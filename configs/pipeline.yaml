@@ -1,0 +1,17 @@
+raw_data_dir: data/raw
+
+chunking:
+  chunk_size: 1000
+  chunk_overlap: 150
+
+embedding:
+  backend: local
+  model_name: BAAI/bge-small-en-v1.5
+  batch_size: 32
+
+vector_store:
+  backend: qdrant
+  collection_name: tenk_filings
+  mode: server
+  url: http://localhost:6333
+  local_path: data/processed/qdrant_local
