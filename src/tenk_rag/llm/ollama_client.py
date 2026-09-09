@@ -27,3 +27,10 @@ class OllamaLLM(LLMClient):
         )
         response.raise_for_status()
         return response.json()["message"]["content"]
+
+    def is_reachable(self) -> bool:
+        try:
+            response = requests.get(f"{self._base_url}/api/tags", timeout=2)
+            return response.ok
+        except requests.RequestException:
+            return False

@@ -4,7 +4,7 @@ Benchmarked RAG pipeline for SEC 10-K filings — configurable chunking/embeddin
 
 ## Status
 
-Phase 2 (answer generation) complete. See project plan for the full phase breakdown.
+Phase 3 (service layer) complete. See project plan for the full phase breakdown.
 
 **Known corpus/parsing characteristics** (found during manual testing, worth remembering when writing eval questions in Phase 5):
 - Item-section tags on chunks are a best-effort heuristic (nearest preceding "Item N" heading). Some filings place their full financial statements or extended risk discussion in an appendix after their last numbered Item, so those chunks inherit that Item's label rather than the semantically obvious one (e.g. financial statements tagged "Item 16" in one filing). Retrieved *content* is still correct in these cases — only the section label is approximate.
@@ -16,6 +16,17 @@ Phase 2 (answer generation) complete. See project plan for the full phase breakd
 Two interchangeable backends behind one `LLMClient` interface, selectable via `llm.backend` in `configs/pipeline.yaml` or `--backend=groq|local` on `scripts/ask.py`:
 - **groq** (hosted, free tier) — `openai/gpt-oss-120b` via the Groq API. Needs a free `GROQ_API_KEY` from console.groq.com in a local `.env` file (gitignored).
 - **local** — Ollama running in Docker, `llama3.2:3b`. No API key, fully offline, but noticeably slower on CPU and less consistent about citation formatting than the hosted model.
+
+## API + UI
+
+FastAPI service (`POST /query`, `GET /health`) backed by a shared `RagService` (also used by `scripts/ask.py`, so the CLI and API never drift), plus a minimal Streamlit demo UI.
+
+```bash
+uv run uvicorn tenk_rag.api.app:app --reload --port 8000   # API; Swagger docs at /docs
+uv run streamlit run ui/app.py                               # UI at :8501, talks to the API over HTTP
+```
+
+`GET /health` does a real dependency check: Qdrant reachability + point count, and each LLM backend's actual availability (Groq via API-key presence, Ollama via a live ping to its `/api/tags` endpoint — no generation call, so health checks stay free and fast).
 
 ## Corpus
 
@@ -62,15 +73,21 @@ src/tenk_rag/
 │   ├── base.py             # EmbeddingModel interface
 │   └── local.py             # sentence-transformers backend
 ├── store/
-│   └── qdrant_store.py       # Qdrant collection management, upsert, query
+│   └── qdrant_store.py       # Qdrant collection management, upsert, query, health info
 ├── llm/
 │   ├── base.py                # LLMClient interface
 │   ├── groq_client.py          # hosted (free tier) backend
-│   ├── ollama_client.py         # local backend
-│   └── factory.py                # builds the configured backend
-└── generation/
-    ├── prompt.py                # grounded-answer prompt (forces inline citations)
-    └── answer.py                  # orchestration + citation parsing
+│   └── ollama_client.py         # local backend (+ is_reachable() for health checks)
+├── generation/
+│   ├── prompt.py                # grounded-answer prompt (forces inline citations)
+│   └── answer.py                  # orchestration + citation parsing
+├── service.py             # RagService: shared orchestration used by both the CLI and the API
+└── api/
+    ├── app.py               # FastAPI app, lifespan builds RagService once, CORS enabled
+    ├── schemas.py             # request/response pydantic models
+    └── routes.py               # POST /query, GET /health
+
+ui/app.py                 # Streamlit demo UI
 
 configs/pipeline.yaml     # chunk size/overlap, embedding model, vector store, LLM settings
 scripts/

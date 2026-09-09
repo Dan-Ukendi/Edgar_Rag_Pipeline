@@ -46,6 +46,10 @@ class QdrantStore:
         ]
         self._client.upsert(collection_name=self._collection_name, points=points)
 
+    def collection_info(self) -> dict:
+        info = self._client.get_collection(self._collection_name)
+        return {"points_count": info.points_count}
+
     def query(self, vector: list[float], top_k: int = 5, ticker: str | None = None):
         query_filter = None
         if ticker:
