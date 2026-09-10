@@ -20,11 +20,12 @@ llm:
   backend: groq   # or "local"
   groq:
     model: openai/gpt-oss-120b
-    max_tokens: 1024
+    max_tokens: 2048
   local:
     model: llama3.2:3b
     base_url: http://localhost:11434
-    max_tokens: 1024
+    max_tokens: 2048
 
 retrieval:
   top_k: 5
+  top_k_per_company: 2

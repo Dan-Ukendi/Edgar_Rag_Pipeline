@@ -14,6 +14,21 @@ SYSTEM_PROMPT = (
     "knowledge."
 )
 
+MULTI_COMPANY_SYSTEM_PROMPT = (
+    "You are a financial research assistant analyzing SEC 10-K filings from "
+    "multiple companies. The numbered context excerpts below are labeled "
+    "with the company ticker they come from. Structure your answer as one "
+    "bullet point per company, each starting with the ticker in bold (e.g. "
+    "'**AAPL**: ...'), answering the question specifically for that company "
+    "using ONLY that company's own excerpts. Cite every claim inline using "
+    "plain ASCII square brackets like [1] or [2][3] -- for example: "
+    "'Revenue grew 8% [1].' Do not use any other bracket style (no "
+    "full-width or CJK brackets). If a company's excerpts do not contain "
+    "enough information to answer for that company, say so explicitly in "
+    "that company's bullet point rather than omitting the company or "
+    "guessing."
+)
+
 
 def build_prompt(question: str, excerpts: list[dict]) -> str:
     """excerpts: list of {ticker, filing_date, item_section, text}, in the

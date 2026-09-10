@@ -38,13 +38,13 @@ class VectorStoreConfig(BaseModel):
 
 class GroqLLMConfig(BaseModel):
     model: str = "openai/gpt-oss-120b"
-    max_tokens: int = Field(1024, gt=0)
+    max_tokens: int = Field(2048, gt=0)
 
 
 class LocalLLMConfig(BaseModel):
     model: str = "llama3.2:3b"
     base_url: str = "http://localhost:11434"
-    max_tokens: int = Field(1024, gt=0)
+    max_tokens: int = Field(2048, gt=0)
 
 
 class LLMConfig(BaseModel):
@@ -55,6 +55,7 @@ class LLMConfig(BaseModel):
 
 class RetrievalConfig(BaseModel):
     top_k: int = Field(5, gt=0)
+    top_k_per_company: int = Field(2, gt=0, description="Chunks retrieved per company when no ticker filter is set")
 
 
 class PipelineConfig(BaseModel):

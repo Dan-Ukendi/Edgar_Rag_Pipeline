@@ -54,9 +54,21 @@ class RagService:
         if backend not in self.llm_clients:
             raise ValueError(f"Backend '{backend}' is not available (available: {list(self.llm_clients)})")
 
-        top_k = top_k or self.config.retrieval.top_k
         query_vector = self.embedder.embed([question])[0]
-        results = self.store.query(query_vector, top_k=top_k, ticker=ticker)
+        multi_company = ticker is None
+
+        if multi_company:
+            # No ticker filter means "All companies" -- retrieve top_k_per_company
+            # chunks for each distinct ticker so every company is represented,
+            # rather than whichever companies happen to score highest overall.
+            # num_groups is a generous cap above the current 6-company corpus.
+            results = self.store.query_grouped_by_ticker(
+                query_vector, group_size=self.config.retrieval.top_k_per_company, num_groups=10
+            )
+        else:
+            top_k = top_k or self.config.retrieval.top_k
+            results = self.store.query(query_vector, top_k=top_k, ticker=ticker)
+
         excerpts = [
             {
                 "ticker": r.payload["ticker"],
@@ -67,4 +79,6 @@ class RagService:
             for r in results
         ]
 
-        return answer_question(question, excerpts, self.llm_clients[backend], backend=backend)
+        return answer_question(
+            question, excerpts, self.llm_clients[backend], backend=backend, multi_company=multi_company
+        )

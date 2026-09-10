@@ -61,3 +61,18 @@ class QdrantStore:
             query_filter=query_filter,
         )
         return response.points
+
+    def query_grouped_by_ticker(self, vector: list[float], group_size: int, num_groups: int):
+        """Retrieve the top `group_size` chunks per distinct ticker, so every
+        company is represented instead of whichever scores highest overall."""
+        response = self._client.query_points_groups(
+            collection_name=self._collection_name,
+            query=vector,
+            group_by="ticker",
+            group_size=group_size,
+            limit=num_groups,
+        )
+        hits = []
+        for group in sorted(response.groups, key=lambda g: g.id):
+            hits.extend(group.hits)
+        return hits
