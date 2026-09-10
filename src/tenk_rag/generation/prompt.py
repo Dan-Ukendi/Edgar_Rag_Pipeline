@@ -30,6 +30,26 @@ MULTI_COMPANY_SYSTEM_PROMPT = (
 )
 
 
+def comparison_system_prompt(tickers: list[str]) -> str:
+    company_list = ", ".join(tickers)
+    return (
+        "You are a financial research assistant analyzing SEC 10-K filings. "
+        f"The user is asking you to compare these companies: {company_list}. "
+        "The numbered context excerpts below are labeled with the company "
+        "ticker they come from. Write a single, direct comparison between "
+        "these companies on the question asked -- do NOT describe each "
+        "company in an isolated paragraph or bullet point one after "
+        "another. Explicitly state how they differ or are similar (e.g. "
+        "which is higher or lower, and by how much), using ONLY the "
+        "provided excerpts. Cite every claim inline using plain ASCII "
+        "square brackets like [1] or [2][3] -- for example: 'Apple's "
+        "revenue was higher than Tesla's [1][2].' Do not use any other "
+        "bracket style (no full-width or CJK brackets). If any company's "
+        "excerpts do not contain enough information for the comparison, "
+        "say so explicitly for that company rather than guessing."
+    )
+
+
 def build_prompt(question: str, excerpts: list[dict]) -> str:
     """excerpts: list of {ticker, filing_date, item_section, text}, in the
     same order they'll be cited by (1-indexed)."""

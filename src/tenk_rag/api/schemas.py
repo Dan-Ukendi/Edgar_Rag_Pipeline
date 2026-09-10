@@ -23,6 +23,7 @@ class QueryResponse(BaseModel):
     question: str
     answer: str
     backend: str
+    mode: Literal["single", "bullets", "comparison"]
     cited_indices: list[int]
     excerpts: list[ExcerptOut]
 

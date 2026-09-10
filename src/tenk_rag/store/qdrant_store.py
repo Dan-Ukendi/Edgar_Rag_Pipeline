@@ -1,7 +1,7 @@
 import uuid
 
 from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, FieldCondition, Filter, MatchValue, PointStruct, VectorParams
+from qdrant_client.models import Distance, FieldCondition, Filter, MatchAny, MatchValue, PointStruct, VectorParams
 
 from ..ingest.chunker import Chunk
 
@@ -62,15 +62,24 @@ class QdrantStore:
         )
         return response.points
 
-    def query_grouped_by_ticker(self, vector: list[float], group_size: int, num_groups: int):
+    def query_grouped_by_ticker(
+        self, vector: list[float], group_size: int, num_groups: int, tickers: list[str] | None = None
+    ):
         """Retrieve the top `group_size` chunks per distinct ticker, so every
-        company is represented instead of whichever scores highest overall."""
+        relevant company is represented instead of whichever scores highest
+        overall. Pass `tickers` to restrict grouping to just those companies
+        (e.g. for a comparison between two named companies) -- otherwise
+        groups over every ticker in the collection, up to `num_groups`."""
+        query_filter = None
+        if tickers:
+            query_filter = Filter(must=[FieldCondition(key="ticker", match=MatchAny(any=tickers))])
         response = self._client.query_points_groups(
             collection_name=self._collection_name,
             query=vector,
             group_by="ticker",
             group_size=group_size,
-            limit=num_groups,
+            limit=len(tickers) if tickers else num_groups,
+            query_filter=query_filter,
         )
         hits = []
         for group in sorted(response.groups, key=lambda g: g.id):

@@ -61,7 +61,7 @@ if st.button("Ask", type="primary") and question:
     if result:
         st.subheader("Answer")
         st.write(escape_dollars(result["answer"]))
-        st.caption(f"Backend: {result['backend']} | Cited: {result['cited_indices'] or 'none'}")
+        st.caption(f"Backend: {result['backend']} | Mode: {result['mode']} | Cited: {result['cited_indices'] or 'none'}")
 
         st.subheader("Retrieved excerpts")
         for ex in result["excerpts"]:

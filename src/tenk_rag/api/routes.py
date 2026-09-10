@@ -34,6 +34,7 @@ def query(body: QueryRequest, request: Request) -> QueryResponse:
         question=result.question,
         answer=result.answer,
         backend=result.backend,
+        mode=result.mode,
         cited_indices=result.cited_indices,
         excerpts=excerpts,
     )

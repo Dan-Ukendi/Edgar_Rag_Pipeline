@@ -11,10 +11,16 @@ Phase 3 (service layer) complete. See project plan for the full phase breakdown.
 - Items 11-14 (executive compensation, ownership, related-party transactions, accountant fees) are typically just "incorporated by reference to the Proxy Statement" boilerplate with no real data — a 10-K corpus limitation, not a pipeline bug. Avoid eval questions targeting those topics.
 - Some open-weight models (observed on Groq's `openai/gpt-oss-120b`) will use CJK-style brackets (`【1】`) instead of ASCII `[1]` for citations despite explicit instructions. The prompt now spells out "plain ASCII square brackets" with an example, and citation parsing accepts both bracket styles as a safety net.
 - Streamlit's markdown renderer treats text between two `$` signs as LaTeX math, which mangles answers/excerpts containing two or more dollar amounts. Fixed by escaping `$` before display in `ui/app.py` — doesn't affect the CLI or raw API JSON, which were never mangled.
+- Comparison questions can hit `top_k_per_company`'s shallow depth (default 2) — e.g. asking to compare two companies' revenue can retrieve one company's income-statement chunk but not the other's, and the model correctly says the figure isn't in the excerpts rather than guessing. A worthwhile Phase 6 sweep target if comparison quality matters.
 
 ## Multi-company questions
 
-Leaving the ticker filter unset ("All companies") doesn't do a plain similarity search across everyone's chunks — that risked returning several chunks from one company and none from others. Instead it retrieves `retrieval.top_k_per_company` chunks *per company* (Qdrant's `query_points_groups`, grouped by ticker) so every company is represented, and uses a dedicated prompt that structures the answer as one bullet point per company (ticker as a bold heading), each citing only that company's own excerpts. Single-ticker questions are unaffected — normal prose answer, no forced structure.
+Leaving the `ticker` filter unset doesn't just mean "search across everyone's chunks" — `RagService.ask()` first runs deterministic company detection (`companies.py`, a small alias table, no extra LLM call) on the question text itself, then picks one of three modes:
+- **No company named** → `bullets` mode across all 6 companies (Qdrant's `query_points_groups`, grouped by ticker, `top_k_per_company` chunks each so every company is represented) — one bullet per company, each citing only its own excerpts.
+- **1+ companies named, no comparison language detected** → same `bullets` structure, but retrieval and the answer are restricted to just the named companies (so "What is Apple's revenue?" only ever pulls and discusses Apple).
+- **2+ companies named *and* comparison language detected** (`compare`, `versus`, `which is higher`, etc.) → `comparison` mode: a single unified answer that directly compares the named companies, not independent parallel bullets.
+
+An explicit `ticker` from the API/UI always overrides detection entirely (unchanged `single` mode, normal prose). The mode actually used is returned in every response (`mode` field / CLI output) for transparency.
 
 ## LLM backends
 

@@ -26,7 +26,7 @@ def main() -> None:
     result = service.ask(question, ticker=ticker, backend=backend_override)
 
     print(f"\nQuestion: {result.question}")
-    print(f"Backend: {result.backend}\n")
+    print(f"Backend: {result.backend} | Mode: {result.mode}\n")
     print(result.answer)
     print(f"\nCited excerpts: {result.cited_indices or 'none'}")
     print("\nRetrieved excerpts:")

@@ -3,6 +3,7 @@
 
 from dataclasses import dataclass
 
+from .companies import detect_comparison_intent, detect_companies
 from .config import PipelineConfig
 from .embeddings.local import SentenceTransformerEmbedder
 from .generation.answer import AnswerResult, answer_question
@@ -55,19 +56,37 @@ class RagService:
             raise ValueError(f"Backend '{backend}' is not available (available: {list(self.llm_clients)})")
 
         query_vector = self.embedder.embed([question])[0]
-        multi_company = ticker is None
 
-        if multi_company:
-            # No ticker filter means "All companies" -- retrieve top_k_per_company
-            # chunks for each distinct ticker so every company is represented,
-            # rather than whichever companies happen to score highest overall.
-            # num_groups is a generous cap above the current 6-company corpus.
-            results = self.store.query_grouped_by_ticker(
-                query_vector, group_size=self.config.retrieval.top_k_per_company, num_groups=10
-            )
-        else:
+        if ticker is not None:
+            # Explicit caller-provided ticker always wins -- unchanged single-company path.
+            mode = "single"
             top_k = top_k or self.config.retrieval.top_k
             results = self.store.query(query_vector, top_k=top_k, ticker=ticker)
+            comparison_tickers = None
+        else:
+            detected = detect_companies(question)
+            is_comparison = len(detected) >= 2 and detect_comparison_intent(question)
+
+            if is_comparison:
+                mode = "comparison"
+                comparison_tickers = detected
+                results = self.store.query_grouped_by_ticker(
+                    query_vector,
+                    group_size=self.config.retrieval.top_k_per_company,
+                    num_groups=10,
+                    tickers=detected,
+                )
+            else:
+                # 0 companies named -> bullets across all companies.
+                # 1+ named (no comparison intent) -> bullets across just those.
+                mode = "bullets"
+                comparison_tickers = None
+                results = self.store.query_grouped_by_ticker(
+                    query_vector,
+                    group_size=self.config.retrieval.top_k_per_company,
+                    num_groups=10,
+                    tickers=detected or None,
+                )
 
         excerpts = [
             {
@@ -80,5 +99,10 @@ class RagService:
         ]
 
         return answer_question(
-            question, excerpts, self.llm_clients[backend], backend=backend, multi_company=multi_company
+            question,
+            excerpts,
+            self.llm_clients[backend],
+            backend=backend,
+            mode=mode,
+            comparison_tickers=comparison_tickers,
         )
