@@ -13,6 +13,13 @@ API_URL = os.environ.get("API_URL", "http://localhost:8000")
 
 TICKERS = ["", "AAPL", "JPM", "XOM", "JNJ", "WMT", "TSLA"]
 
+
+def escape_dollars(text: str) -> str:
+    """Streamlit renders text between two $ signs as LaTeX math, which mangles
+    dollar amounts (e.g. "$21.354 billion ... $22.247 billion" gets parsed as
+    one math block). Escaping $ as \\$ shows a literal dollar sign instead."""
+    return text.replace("$", "\\$")
+
 st.set_page_config(page_title="Edgar RAG Pipeline", page_icon="📊")
 st.title("Edgar RAG Pipeline")
 st.caption("Ask questions about 6 companies' SEC 10-K filings, grounded with inline citations.")
@@ -53,11 +60,11 @@ if st.button("Ask", type="primary") and question:
 
     if result:
         st.subheader("Answer")
-        st.write(result["answer"])
+        st.write(escape_dollars(result["answer"]))
         st.caption(f"Backend: {result['backend']} | Cited: {result['cited_indices'] or 'none'}")
 
         st.subheader("Retrieved excerpts")
         for ex in result["excerpts"]:
             badge = "✅ cited" if ex["cited"] else "not cited"
             with st.expander(f"[{ex['index']}] {ex['ticker']} | {ex['filing_date']} | {ex['item_section']} | {badge}"):
-                st.write(ex["text"])
+                st.write(escape_dollars(ex["text"]))
