@@ -4,6 +4,7 @@ Kept as plain, serializable settings so Phase 6 can generate many variants
 of this config programmatically for benchmarking sweeps.
 """
 
+import os
 from pathlib import Path
 from typing import Literal
 
@@ -70,4 +71,13 @@ class PipelineConfig(BaseModel):
     def from_yaml(cls, path: str | Path) -> "PipelineConfig":
         with open(path, encoding="utf-8") as f:
             data = yaml.safe_load(f) or {}
-        return cls(**data)
+        config = cls(**data)
+
+        # Service-address overrides for containerized environments, where
+        # "localhost" from the YAML doesn't resolve to other containers.
+        if qdrant_url := os.environ.get("QDRANT_URL"):
+            config.vector_store.url = qdrant_url
+        if ollama_url := os.environ.get("OLLAMA_BASE_URL"):
+            config.llm.local.base_url = ollama_url
+
+        return config
