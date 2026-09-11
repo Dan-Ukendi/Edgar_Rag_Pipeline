@@ -76,16 +76,24 @@ class RagService:
                     num_groups=10,
                     tickers=detected,
                 )
+            elif len(detected) == 1:
+                # Exactly one company named, no comparison intent -- same
+                # retrieval depth as an explicit single-ticker query (deeper
+                # than top_k_per_company, which is sized for spreading across
+                # several companies at once). Answer is still bullets-format.
+                mode = "bullets"
+                comparison_tickers = None
+                effective_top_k = top_k or self.config.retrieval.top_k
+                results = self.store.query(query_vector, top_k=effective_top_k, ticker=detected[0])
             else:
                 # 0 companies named -> bullets across all companies.
-                # 1+ named (no comparison intent) -> bullets across just those.
                 mode = "bullets"
                 comparison_tickers = None
                 results = self.store.query_grouped_by_ticker(
                     query_vector,
                     group_size=self.config.retrieval.top_k_per_company,
                     num_groups=10,
-                    tickers=detected or None,
+                    tickers=None,
                 )
 
         excerpts = [

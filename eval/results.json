@@ -1,0 +1,1767 @@
+{
+  "backend": "groq",
+  "results": [
+    {
+      "id": "Q01",
+      "question": "What were Apple's total net sales in fiscal 2025?",
+      "type": "factual_simple",
+      "difficulty": "easy",
+      "mode": "bullets",
+      "answer": "**AAPL**: Apple\u2019s total net sales for fiscal 2025 were\u202f$416,161\u202fmillion\u202f[1][2][3].",
+      "expected_pairs": [
+        [
+          "AAPL",
+          "Item 7"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "AAPL",
+          "Item 7"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 7"
+        ],
+        [
+          "AAPL",
+          "Item 7"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 1.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system's answer correctly identifies the total net sales for fiscal 2025 as $416,161 million, which is explicitly supported by the retrieved excerpts and matches the key fact in the gold answer. The answer directly addresses the specific question asked."
+    },
+    {
+      "id": "Q02",
+      "question": "How much did Apple spend on research and development in fiscal 2025?",
+      "type": "factual_simple",
+      "difficulty": "easy",
+      "mode": "bullets",
+      "answer": "**AAPL**: Apple spent **$34,550\u202fmillion** on research and development in fiscal 2025\u202f[3][1].",
+      "expected_pairs": [
+        [
+          "AAPL",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "AAPL",
+          "Item 7"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 7"
+        ],
+        [
+          "AAPL",
+          "Item 7"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 1.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The answer correctly identifies Apple's R&D spending for fiscal 2025 as $34,550 million, which matches the figures explicitly stated in the retrieved excerpts. While the answer may be flagged as incorrect due to the presence of a fabricated markdown artifact ('**AAPL:**') and a missing footnote (10%), the core financial data required to answer the question is accurate and supported by the provided text."
+    },
+    {
+      "id": "Q03",
+      "question": "How many full-time equivalent employees did Apple have at the end of fiscal 2025?",
+      "type": "factual_simple",
+      "difficulty": "easy",
+      "mode": "bullets",
+      "answer": "**AAPL**: The provided excerpts do not include any statement or table reporting the number of full\u2011time equivalent employees at the end of fiscal 2025, so this information cannot be determined from the given context.\u202f[1]",
+      "expected_pairs": [
+        [
+          "AAPL",
+          "Item 1"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          null
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": false,
+      "judge_reasoning": "The system correctly identified that the number of full-time equivalent employees was not present in the provided excerpts, making its refusal to answer faithful to the context and relevant to the specific constraint of the provided text. However, the gold answer indicates the information was actually disclosed in the full filing (approximately 166,000), meaning the system's answer is factually incorrect regarding the availability of the information in the source document as a whole."
+    },
+    {
+      "id": "Q04",
+      "question": "What was Apple's Services gross margin percentage in fiscal 2025?",
+      "type": "factual_simple",
+      "difficulty": "medium",
+      "mode": "bullets",
+      "answer": "**AAPL**: Apple\u2019s Services gross margin percentage for fiscal 2025 was **75.4%**\u30101\u3011.",
+      "expected_pairs": [
+        [
+          "AAPL",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "AAPL",
+          "Item 7"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 7"
+        ],
+        [
+          "AAPL",
+          "Item 7"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 1.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system's answer correctly identifies the 75.4% gross margin percentage for Services in fiscal 2025, which is explicitly stated in retrieved excerpt [1]. It addresses the question directly and matches the key fact in the gold answer."
+    },
+    {
+      "id": "Q05",
+      "question": "Apple's effective tax rate dropped sharply in fiscal 2025. What was the rate, and what single item explains most of the year-over-year decrease?",
+      "type": "multi_hop",
+      "difficulty": "hard",
+      "mode": "bullets",
+      "answer": "**AAPL**: Apple\u2019s effective tax rate fell to **15.6%** in fiscal 2025\u202f[1]. The primary driver of the year\u2011over\u2011year decline was a large **foreign tax charge of $10.2\u202fbillion (net), representing $15.8\u202fbillion payable to Ireland via release of amounts held in escrow**, which offset other tax items and lowered the overall effective rate\u202f[4].",
+      "expected_pairs": [
+        [
+          "AAPL",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "AAPL",
+          "Item 7"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 1.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": false,
+      "judge_reasoning": "The system correctly identifies the 15.6% rate supported by the excerpts. However, it fails to identify the correct driver for the decrease, citing a 2024 charge that makes the rate appear lower in 2025 rather than higher in 2024 due to the absence of that charge in 2025 as the gold answer states."
+    },
+    {
+      "id": "Q06",
+      "question": "How much common stock did Apple repurchase during fiscal 2025, and what was the size of the new repurchase program announced in May 2025?",
+      "type": "factual_simple",
+      "difficulty": "medium",
+      "mode": "bullets",
+      "answer": "- **AAPL**: Apple repurchased roughly\u202f402\u202fmillion shares of its common stock during fiscal\u202f2025\u202f[1]. In May\u202f2025 the company announced a new share\u2011repurchase program with authorization to buy up to\u202f$100\u202fbillion\u202fof its common stock\u202f[3][4].",
+      "expected_pairs": [
+        [
+          "AAPL",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 5"
+        ],
+        [
+          "AAPL",
+          "Item 7"
+        ],
+        [
+          "AAPL",
+          "Item 5"
+        ],
+        [
+          "AAPL",
+          "Item 5"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 1.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system's answer is faithful to the provided excerpts, specifically citing the 402 million shares and $100 billion program from the text. It is relevant and correct because it answers the core question (identifying the specific dollar amount of $89.3 billion and the new program size of $100 billion), even though it did not include the dividend detail mentioned in the gold answer."
+    },
+    {
+      "id": "Q07",
+      "question": "How many vehicles did Tesla produce and deliver in 2025?",
+      "type": "factual_simple",
+      "difficulty": "easy",
+      "mode": "bullets",
+      "answer": "**TSLA**: Tesla produced approximately\u202f1.66\u202fmillion consumer vehicles and delivered approximately\u202f1.64\u202fmillion consumer vehicles in 2025\u202f[2].",
+      "expected_pairs": [
+        [
+          "TSLA",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 1"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 1.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system's answer directly quotes the specific production and delivery figures found in retrieved excerpt [2], making it fully faithful and relevant. These figures match the gold answer exactly."
+    },
+    {
+      "id": "Q08",
+      "question": "How much energy storage did Tesla deploy in 2025?",
+      "type": "factual_simple",
+      "difficulty": "easy",
+      "mode": "bullets",
+      "answer": "**TSLA**: Tesla deployed 46.7\u202fGWh of energy storage products in 2025\u202f[1].",
+      "expected_pairs": [
+        [
+          "TSLA",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 1"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 1"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 1.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system's answer of 46.7 GWh exactly matches the figure stated in the retrieved excerpts and the gold answer. It correctly identifies the specific metric (energy storage deployed) and the year (2025) requested, without adding unsupported information."
+    },
+    {
+      "id": "Q09",
+      "question": "What was Tesla's total revenue in 2025 and how did it change from 2024?",
+      "type": "factual_simple",
+      "difficulty": "easy",
+      "mode": "bullets",
+      "answer": "**TSLA**: Total revenue in 2025 was $94.83\u202fbillion, which represented a decrease of $2.86\u202fbillion (about 3%) from the $97.69\u202fbillion reported in 2024\u30103\u3011\u30102\u3011.",
+      "expected_pairs": [
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 8"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 0.5,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system's answer accurately reflects the data in the excerpts (94,827 million, decrease of 2,863 million / 3%) and directly answers the question, perfectly matching the gold answer."
+    },
+    {
+      "id": "Q10",
+      "question": "How many employees did Tesla have worldwide at the end of 2025?",
+      "type": "factual_simple",
+      "difficulty": "easy",
+      "mode": "bullets",
+      "answer": "**TSLA**: Tesla reported a worldwide employee headcount of\u202f134,785\u202fas of December\u202f31,\u202f2025\u30101\u3011.",
+      "expected_pairs": [
+        [
+          "TSLA",
+          "Item 1"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "TSLA",
+          "Item 1"
+        ],
+        [
+          "TSLA",
+          "Item 1"
+        ],
+        [
+          "TSLA",
+          "Item 8"
+        ],
+        [
+          "TSLA",
+          null
+        ],
+        [
+          "TSLA",
+          "Item 1"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 1.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system's answer accurately cites the specific headcount figure (134,785) and date (December 31, 2025) found in retrieved excerpt [1]. It directly addresses the question and matches the gold answer perfectly."
+    },
+    {
+      "id": "Q11",
+      "question": "Tesla's R&D expense rose sharply in 2025 while revenue fell. Quantify both the R&D increase and its change as a percentage of revenue, and state the main driver.",
+      "type": "multi_hop",
+      "difficulty": "hard",
+      "mode": "bullets",
+      "answer": "**TSLA**: R&D expense rose by **$1.87\u202fbillion**, a **41%** year\u2011over\u2011year increase in 2025 versus 2024, and its share of revenue grew from **5% to 7%** (a 2\u2011percentage\u2011point rise)\u202f[1][4]. Total revenue fell from $97,690\u202fmillion to $94,827\u202fmillion, a decline of **$2.86\u202fbillion** or **3%**\u202f[3]. The sharp R&D increase was primarily driven by higher costs related to **AI and other programs**, including an additional **$500\u202fmillion** of stock\u2011based compensation\u202f[1].",
+      "expected_pairs": [
+        [
+          "TSLA",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 1"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 1.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system answer provides the exact figures ($1.87B increase, 41%, ratio change 5% to 7%, revenue decline) and the main driver (AI/other programs + stock compensation) found in the retrieved excerpts. It also correctly identifies the revenue decline from excerpt [3]. All facts are supported by the text and match the gold answer."
+    },
+    {
+      "id": "Q12",
+      "question": "What capital expenditure level does Tesla expect for 2026, and what is driving it?",
+      "type": "factual_simple",
+      "difficulty": "medium",
+      "mode": "bullets",
+      "answer": "**TSLA**: Tesla expects capital expenditures to exceed $20\u202fbillion in 2026. This increase is being driven primarily by its AI initiatives, including investments in compute infrastructure and data centers, the expansion and ramp\u2011up of manufacturing and R&D production lines and facilities, and growth in its fleet of company\u2011operated AI\u2011enabled assets as well as its retail, service, and charging footprint [2].",
+      "expected_pairs": [
+        [
+          "TSLA",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 8"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 1.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system answered the question accurately, stating capex is expected to exceed $20 billion, and correctly attributed this to AI initiatives, compute infrastructure, manufacturing/R&D expansion, and fleet/retail/service/charging growth, all directly supported by excerpt [2]. The content matches the gold answer's key facts (e.g., >$20B in 2026, driven by AI and related expansions); the system's omission of the 2025 comparison figure does not make the answer incorrect, though it includes extra context from excerpts."
+    },
+    {
+      "id": "Q13",
+      "question": "What were Walmart's total revenues in fiscal 2026?",
+      "type": "factual_simple",
+      "difficulty": "easy",
+      "mode": "bullets",
+      "answer": "**WMT**: The excerpts show Walmart\u202fU.S. net sales of $482.975\u202fbillion and Walmart\u202fInternational net sales of $130.423\u202fbillion for fiscal\u202f2026 [2][4]. However, the filing does not provide Sam\u2019s\u202fClub sales or a consolidated total\u2011revenue figure, so Walmart\u2019s overall total revenue for fiscal\u202f2026 cannot be determined from the information given.",
+      "expected_pairs": [
+        [
+          "WMT",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": false,
+      "judge_reasoning": "While the system's claim that the specific excerpts do not contain the consolidated total is faithful to the provided text (which lists segment data but not the consolidated total), the system incorrectly concludes that the total is 'not disclosed' in the filing. The gold answer confirms that the total revenue of $713,163 million was disclosed in the filing, making the final conclusion incorrect relative to the gold standard."
+    },
+    {
+      "id": "Q14",
+      "question": "How many associates does Walmart employ, and how are they split between the U.S. and international?",
+      "type": "factual_simple",
+      "difficulty": "easy",
+      "mode": "bullets",
+      "answer": "- **WMT**: The excerpts provided do not contain any information about the total number of Walmart associates or how they are divided between the U.S. and international operations, so this question cannot be answered from the given text [1].",
+      "expected_pairs": [
+        [
+          "WMT",
+          "Item 1"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": false,
+      "judge_reasoning": "The system correctly identified that the associate count is not present in the provided excerpts (faithful) and addressed the question (relevant). However, the gold answer provides specific figures (2.1M total, 1.6M U.S., 0.5M international), meaning the system's refusal to answer or statement of unavailability does not match the gold answer's content, making it incorrect for the purpose of this grading task, which allows for 'unanswerable' classification only if the gold answer starts with 'Not disclosed'. Since the gold answer has specific facts, the system's failure to retrieve them (likely due to retrieval failure) results in a 'correct' verdict of false, as the system did not provide the matching facts."
+    },
+    {
+      "id": "Q15",
+      "question": "What were net sales for each of Walmart's three reportable segments in fiscal 2026?",
+      "type": "factual_simple",
+      "difficulty": "medium",
+      "mode": "bullets",
+      "answer": "**WMT**: In fiscal 2026, Walmart reported net sales of\u202f$482,975\u202fmillion for its Walmart\u202fU.S. segment\u202f[4] and\u202f$130,423\u202fmillion for its Walmart\u202fInternational segment\u202f[5]. Net sales for the Sam\u2019s Club\u202fU.S. segment are not disclosed in the provided excerpts.",
+      "expected_pairs": [
+        [
+          "WMT",
+          "Item 1"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": false,
+      "judge_reasoning": "The answer is faithful because both figure provided ($482,975M and $130,423M) are directly supported by excerpts [4] and [5]. It is relevant because it addresses the net sales for the specified segments. It is not correct because it fails to provide the net sales for the Sam's Club U.S. segment, claiming it is not disclosed in the excerpts (while the gold answer indicates it is $93.0 billion), thus omitting critical information required by the question."
+    },
+    {
+      "id": "Q16",
+      "question": "What was Walmart's diluted EPS in fiscal 2026?",
+      "type": "factual_simple",
+      "difficulty": "easy",
+      "mode": "bullets",
+      "answer": "**WMT**: Diluted earnings per share (EPS) for fiscal\u202f2026 was **$2.73** per share\u202f[4].",
+      "expected_pairs": [
+        [
+          "WMT",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system's answer correctly identifies the diluted EPS for fiscal 2026 as $2.73, matching both the retrieved excerpt and the gold answer. It is factually supported by the text provided and directly addresses the question."
+    },
+    {
+      "id": "Q17",
+      "question": "Walmart's operating expenses as a percentage of net sales increased in fiscal 2026. By how many basis points, and what three factors does management cite?",
+      "type": "multi_hop",
+      "difficulty": "hard",
+      "mode": "bullets",
+      "answer": "**WMT**: Operating expenses as a percentage of net sales rose by **20 basis points** in fiscal\u202f2026\u202f[1][2]. Management attributes the increase to (1) **higher self\u2011insured general liability claims expense in the U.S.**\u202f[1][2] and (2) **increased depreciation related to Walmart\u2019s capital investments**\u202f[4]. The excerpts provided mention only these two drivers; a third factor is not identified in the available text.",
+      "expected_pairs": [
+        [
+          "WMT",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": false,
+      "judge_reasoning": "The system correctly identified the 20 basis point increase and two of the three factors (self-insured claims and depreciation) based on the provided excerpts. However, it failed to identify the third factor (the $0.7 billion charge related to PhonePe share-based compensation) because that specific detail was not present in the retrieved excerpts provided to it. While the answer is faithful to the input, it is not correct relative to the gold answer because it is missing a key fact required by the question."
+    },
+    {
+      "id": "Q18",
+      "question": "How many stores does Walmart operate in each segment, and in how many countries does the company operate?",
+      "type": "factual_simple",
+      "difficulty": "medium",
+      "mode": "bullets",
+      "answer": "**WMT**: Walmart U.S. operates 4,611 stores in the United States (including all 50 states, Washington D.C. and Puerto Rico)\u202f[5]. Walmart International operates 5,743 stores across 18 countries outside the United States\u202f[2]. The filing does not disclose the number of Sam\u2019s Club U.S. stores\u202f[\u2014]. Across its three reportable segments, Walmart conducts business in the United States plus the 18 international countries listed for the International segment, for a total of 19 countries\u202f[1][2].",
+      "expected_pairs": [
+        [
+          "WMT",
+          "Item 1"
+        ],
+        [
+          "WMT",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": false,
+      "relevant": true,
+      "correct": false,
+      "judge_reasoning": "The answer is relevant as it addresses the question, but it is unfaithful because it claims the filing does not disclose the number of Sam's Club stores, whereas the gold answer provides a specific count (601), implying this information was available and should have been cited or retrieved. Consequently, the answer is incorrect because it omits the Sam's Club store count and the total retail unit count, failing to match the key facts in the gold answer."
+    },
+    {
+      "id": "Q19",
+      "question": "What was JPMorganChase's net income in 2025 and how did it compare to 2024?",
+      "type": "factual_simple",
+      "difficulty": "easy",
+      "mode": "bullets",
+      "answer": "**JPM**: Net income for 2025 was\u202f$57,048\u202fmillion, which was lower than the $58,471\u202fmillion reported for 2024\u2014a decrease of roughly $1.4\u202fbillion (about 2%) [2].",
+      "expected_pairs": [
+        [
+          "JPM",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system's answer accurately reports the net income figures for 2025 ($57,048 million) and 2024 ($58,471 million) and the ~2% decrease, all of which are explicitly supported by excerpt [2]. The answer directly addresses the question. Although the gold answer includes additional EPS data not present in the system's answer, the system's answer matches the key facts requested (net income and comparison) without contradiction, so it is considered correct."
+    },
+    {
+      "id": "Q20",
+      "question": "What was JPMorganChase's Standardized CET1 capital ratio at the end of 2025?",
+      "type": "factual_simple",
+      "difficulty": "medium",
+      "mode": "bullets",
+      "answer": "**JPM**: The Standardized CET1 capital ratio for JPMorgan\u202fChase & Co. at December\u202f31\u202f2025 was **14.6\u202f%**\u30101\u3011.",
+      "expected_pairs": [
+        [
+          "JPM",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system's answer of 14.6% for the Standardized CET1 capital ratio at year-end 2025 is explicitly supported by Excerpt [1] in the table for JPMorgan Chase & Co. This matches the primary figure in the gold answer, although the system omitted the additional context provided in the gold answer regarding the 2024 comparison and the regulatory requirement."
+    },
+    {
+      "id": "Q21",
+      "question": "How many employees does JPMorganChase have and where are they located?",
+      "type": "factual_simple",
+      "difficulty": "easy",
+      "mode": "bullets",
+      "answer": "- **JPM**: JPMorgan\u202fChase employed **318,512** full\u2011time and part\u2011time employees worldwide as of December\u202f31\u202f2025. These employees are spread across **66 countries**, with **58\u202f%** (approximately 185,000) located in the United States. Regionally, the workforce comprises **185,208** employees in North America, **96,499** in Asia\u2011Pacific, **31,030** in Europe/Middle East/Africa, and **5,775** in Latin America/Caribbean\u202f[1][3].",
+      "expected_pairs": [
+        [
+          "JPM",
+          "Item 1"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "JPM",
+          "Item 1"
+        ],
+        [
+          "JPM",
+          "Item 1C"
+        ],
+        [
+          "JPM",
+          "Item 1"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 2"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 1.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system's answer accurately reflects the retrieved excerpts, which align with the gold answer. It correctly cites the total employee count (318,512), the number of countries (66), and the percentage in the U.S. (58%), while providing additional regional breakdowns supported by the source text."
+    },
+    {
+      "id": "Q22",
+      "question": "What was net income for JPMorganChase's Commercial & Investment Bank in 2025?",
+      "type": "factual_simple",
+      "difficulty": "medium",
+      "mode": "bullets",
+      "answer": "- **JPM**: The provided excerpts contain only consolidated net\u2011income figures for JPMorgan\u202fChase (e.g., $57.0\u202fbillion for 2025) and do not break out net income by the Commercial & Investment Bank segment. Therefore, the net income for JPMorgan\u202fChase\u2019s Commercial & Investment Bank in 2025 is not disclosed in the given information.\u202f[4]",
+      "expected_pairs": [
+        [
+          "JPM",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": false,
+      "judge_reasoning": "The system correctly identified that the specific segment-level data was not present in the provided excerpts (faithful and relevant by excluding it from its reasoning, though it failed to find it in excerpt 1 which did contain it, wait, excerpt 1 DOES contain the answer: 'Net income was $27.8 billion, up 12%'). Re-evaluating Excerpt 1: It explicitly states 'Net income was $27.8 billion, up 12%' under the header '2025 compared with 2024' following the Banking & Payments revenue table. The context of Excerpt 1 is the Commercial & Investment Bank segment (implied by the table structure and the specific metrics like Banking & Payments revenue which are CIB specific). The system failed to extract this information. Therefore, the system's answer that it is 'not disclosed' is factually incorrect relative to the provided excerpts (unfaithful to the ground truth in the excerpts) and incorrect relative to the gold answer. Wait, 'faithful' means 'every factual claim in the answer is actually supported by the retrieved excerpts'. The system claims it is NOT disclosed. Is that claim supported? The excerpts DO disclose it. So the system's claim that it is not disclosed is false/not supported by the text which actually does disclose it. Thus Unfaithful. Also Incorrect."
+    },
+    {
+      "id": "Q23",
+      "question": "JPMorganChase's provision for credit losses rose sharply in 2025. What was the amount and increase, and what specific transaction contributed a large lending-related commitment provision?",
+      "type": "multi_hop",
+      "difficulty": "hard",
+      "mode": "bullets",
+      "answer": "**JPM:** The 2025 allowance for credit losses grew by a net $1.4\u202fbillion, comprising $1.1\u202fbillion for consumer loans and $350\u202fmillion for wholesale loans. In addition, the firm recorded a $3.0\u202fbillion net addition to the allowance for lending\u2011related commitments in other liabilities\u202f[3]. This large lending\u2011related commitment provision was tied to the acquisition of assets and assumed liabilities of First Republic Bank, which the firm treated as a business combination under U.S. GAAP\u202f[2].",
+      "expected_pairs": [
+        [
+          "JPM",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": false,
+      "relevant": true,
+      "correct": false,
+      "judge_reasoning": "The system's answer is not faithful because it fabricates a connection between the lending-related commitment provision and the First Republic Bank acquisition (citing excerpt 2), which is not supported by the retrieved text, and it misses the total provision amount. It is not correct because it omits the specific total provision ($14.212 billion), the 33% increase, and incorrectly attributes the large commitment provision to the First Republic acquisition instead of the Apple Card transaction."
+    },
+    {
+      "id": "Q24",
+      "question": "What were JPMorganChase's investment banking fee components in 2025?",
+      "type": "factual_simple",
+      "difficulty": "medium",
+      "mode": "bullets",
+      "answer": "**JPM**: Investment banking fees were $9,615\u202fmillion for the year ended December\u202f31,\u202f2025\u30103\u3011.",
+      "expected_pairs": [
+        [
+          "JPM",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": false,
+      "correct": false,
+      "judge_reasoning": "The answer is faithful because the total figure of $9,615 million is explicitly stated in excerpt [3]. However, it is not relevant or correct because the question asks for the 'components' of the fees (debt, equity, advisory), which were not provided in the retrieved excerpts; the system only provided the total fee amount, whereas the gold answer requires the specific breakdown of components and their corresponding values."
+    },
+    {
+      "id": "Q25",
+      "question": "What was ExxonMobil's average upstream production in 2025?",
+      "type": "factual_simple",
+      "difficulty": "easy",
+      "mode": "bullets",
+      "answer": "**XOM**: ExxonMobil\u2019s upstream operations produced an average of\u202f4.7\u202fmillion oil\u2011equivalent barrels per day in 2025\u202f[2][4].",
+      "expected_pairs": [
+        [
+          "XOM",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system's answer is fully supported by the excerpts and directly addresses the question. The figure of 4.7 Moebd matches the gold answer exactly."
+    },
+    {
+      "id": "Q26",
+      "question": "How much did ExxonMobil return to shareholders in 2025 through dividends and buybacks?",
+      "type": "factual_simple",
+      "difficulty": "medium",
+      "mode": "bullets",
+      "answer": "**XOM**: ExxonMobil returned roughly **$34.9\u202fbillion** to shareholders in 2025, comprising about **$14.9\u202fbillion in dividends** (as shown in the Consolidated Statement of Changes in Equity) and **$20\u202fbillion in share repurchases** (completed buybacks)\u202f[2][4].",
+      "expected_pairs": [
+        [
+          "XOM",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": false,
+      "judge_reasoning": "The system is faithful to the retrieved excerpts (citing ~$14.9B from excerpt [2] and $20B buybacks from excerpt [4]), and the answer is relevant to the question. However, it is incorrect compared to the gold answer, which states dividends of $17.2 billion instead of ~$14.9 billion."
+    },
+    {
+      "id": "Q27",
+      "question": "What were ExxonMobil's proved reserves at year-end 2025, and what portion was proved undeveloped?",
+      "type": "factual_simple",
+      "difficulty": "medium",
+      "mode": "bullets",
+      "answer": "**XOM**:\u202fExxonMobil reported total proved reserves of\u202f36,408\u202f(million barrels of oil\u2011equivalent) at year\u2011end\u202f2025, of which\u202f13,518\u202f(million barrels of oil\u2011equivalent) were classified as proved undeveloped reserves\u30104\u3011.",
+      "expected_pairs": [
+        [
+          "XOM",
+          "Item 1"
+        ],
+        [
+          "XOM",
+          "Item 2"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": false,
+      "judge_reasoning": "The answer is faithful because the cited excerpt explicitly lists 36,408 as the total and 13,518 as the total undeveloped. The answer is relevant as it directly addresses the question about year-end 2025 reserves. However, the answer is incorrect because it omits the equity company reserves; the gold answer provides the combined figure of 19.3 billion barrels (developed and undeveloped combined), which accounts for both consolidated and equity reserves, whereas the system cited only the consolidated subsidiary figures."
+    },
+    {
+      "id": "Q28",
+      "question": "How many regular employees did ExxonMobil have at year-end 2025?",
+      "type": "factual_simple",
+      "difficulty": "easy",
+      "mode": "bullets",
+      "answer": "**XOM**: ExxonMobil had 58\u202fthousand regular employees at year\u2011end\u202f2025\u30101\u3011.",
+      "expected_pairs": [
+        [
+          "XOM",
+          "Item 1"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The answer correctly identifies the figure (58 thousand) found in excerpt [1] and directly answers the specific question asked. Although the gold answer provides additional context regarding previous years, the system's answer is factually consistent with the provided excerpts and the core of the gold answer."
+    },
+    {
+      "id": "Q29",
+      "question": "What structural cost savings has ExxonMobil achieved relative to 2019, how much came in 2025 alone, and what is the target by 2030?",
+      "type": "multi_hop",
+      "difficulty": "hard",
+      "mode": "bullets",
+      "answer": "**XOM**: ExxonMobil reports that, relative to 2019, it has achieved cumulative structural cost savings of **$15.1\u202fbillion**, which includes **$3.0\u202fbillion** realized in **2025 alone**\u202f[5]. The excerpts do not provide a disclosed target for total structural cost savings by 2030.",
+      "expected_pairs": [
+        [
+          "XOM",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": false,
+      "judge_reasoning": "The system's claims regarding the $15.1 billion cumulative savings and the $3.0 billion in 2025 are fully supported by excerpt [5]. However, the answer is incorrect compared to the gold answer because it claims the 2030 target is not disclosed, whereas the gold answer identifies a specific target of $20 billion. The system failed to extract this key piece of information."
+    },
+    {
+      "id": "Q30",
+      "question": "What was Guyana's production in 2025 and what is ExxonMobil's development outlook for the Stabroek Block?",
+      "type": "factual_simple",
+      "difficulty": "medium",
+      "mode": "bullets",
+      "answer": "**XOM**: Guyana\u2019s offshore operations produced a record 715\u202fkbd of oil in 2025\u202f[1].  ExxonMobil\u2019s development outlook for the Stabroek Block includes bringing a total of eight FPSO vessels into operation by the end of 2030, with the fifth and sixth developments (Uaru and Whiptail, each ~250\u202fkbd capacity) progressing on schedule, a final investment decision already taken for the Hammerhead development (expected on\u2011line in 2029), and continued expansion of the FPSO fleet to support these projects\u202f[1].",
+      "expected_pairs": [
+        [
+          "XOM",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The answer accurately reports Guyana's 2025 production of 715 kbd and the development outlook details (8 FPSOs by 2030, Uaru/Whiptail status, Hammerhead FID/2029 date) directly from the retrieved excerpts. It matches all key facts in the gold answer, including the specific production figure and development milestones."
+    },
+    {
+      "id": "Q31",
+      "question": "What were Johnson & Johnson's worldwide sales in 2025?",
+      "type": "factual_simple",
+      "difficulty": "easy",
+      "mode": "bullets",
+      "answer": "**JNJ**: Johnson &\u202fJohnson\u2019s worldwide sales in 2025 were approximately $94.2\u202fbillion (reported as $94,193\u202fmillion)\u202f[2][3].",
+      "expected_pairs": [
+        [
+          "JNJ",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "JNJ",
+          "Item 7"
+        ],
+        [
+          "JNJ",
+          "Item 7"
+        ],
+        [
+          "JNJ",
+          "Item 8"
+        ],
+        [
+          "JNJ",
+          "Item 7"
+        ],
+        [
+          "JNJ",
+          "Item 8"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 1.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system's answer correctly identifies J&J's 2025 worldwide sales as approximately $94.2 billion, which matches the gold answer's key fact. The statement is supported by excerpts [2] and [3]. Although the system omits specific growth rate breakdowns included in the gold answer, it provides the primary figure requested, so it is correct."
+    },
+    {
+      "id": "Q32",
+      "question": "What were sales for Johnson & Johnson's two business segments in 2025?",
+      "type": "factual_simple",
+      "difficulty": "easy",
+      "mode": "bullets",
+      "answer": "**JNJ**: In 2025 the Innovative Medicine segment generated\u202f$60.4\u202fbillion in sales, while the MedTech segment generated\u202f$33.8\u202fbillion in sales\u202f[4][2].",
+      "expected_pairs": [
+        [
+          "JNJ",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "JNJ",
+          "Item 5"
+        ],
+        [
+          "JNJ",
+          "Item 7"
+        ],
+        [
+          "JNJ",
+          "Item 8"
+        ],
+        [
+          "JNJ",
+          "Item 7"
+        ],
+        [
+          "JNJ",
+          "Item 8"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 1.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system's answer accurately lists the 2025 sales figures for both segments ($60.4 billion for Innovative Medicine and $33.8 billion for MedTech) as provided in the retrieved excerpts [4] and [2]. These figures match the gold answer exactly, and the answer directly addresses the question asked."
+    },
+    {
+      "id": "Q33",
+      "question": "How much did the STELARA decline weigh on Johnson & Johnson's sales in 2025, both at the total company level and within the Innovative Medicine segment?",
+      "type": "multi_hop",
+      "difficulty": "hard",
+      "mode": "bullets",
+      "answer": "**JNJ**: In 2025 the drop in\u202fSTELARA\u202fsales weighed on the company\u2019s overall sales by reducing worldwide operational sales roughly 6.2% (with a 7.6% hit to U.S. sales and a 4.4% hit to international sales)\u202f[2]. Within the Innovative Medicine segment the impact was larger, cutting worldwide segment operational sales about 10.4% (12.3% in the U.S. and 7.9% internationally)\u202f[1].",
+      "expected_pairs": [
+        [
+          "JNJ",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "JNJ",
+          "Item 7"
+        ],
+        [
+          "JNJ",
+          "Item 7"
+        ],
+        [
+          "JNJ",
+          "Item 7"
+        ],
+        [
+          "JNJ",
+          "Item 7"
+        ],
+        [
+          "JNJ",
+          "Item 5"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 1.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The answer accurately reports the STELARA decline impact on total company (worldwide ~6.2%, U.S. ~7.6%, international ~4.4%) and Innovative Medicine segment (worldwide ~10.4%, U.S. ~12.3%, international ~7.9%) from the cited excerpts. These match the gold answer's key figures, and all claims are directly supported by the retrieved text."
+    },
+    {
+      "id": "Q34",
+      "question": "How many employees does Johnson & Johnson have, and what was its voluntary turnover rate in 2025?",
+      "type": "factual_simple",
+      "difficulty": "medium",
+      "mode": "bullets",
+      "answer": "**JNJ**: Johnson\u202f&\u202fJohnson reports approximately\u202f138,200\u202femployees worldwide\u202f[1]. The excerpts do not contain any information on the company\u2019s voluntary turnover rate for 2025, so that metric cannot be determined from the provided text.",
+      "expected_pairs": [
+        [
+          "JNJ",
+          "Item 1"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "JNJ",
+          "Item 5"
+        ],
+        [
+          "JNJ",
+          null
+        ],
+        [
+          "JNJ",
+          "Item 8"
+        ],
+        [
+          "JNJ",
+          "Item 8"
+        ],
+        [
+          "JNJ",
+          "Item 8"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": false,
+      "judge_reasoning": "The answer is faithful because it accurately reports the 138,200 figure found in the excerpts and correctly states that the turnover rate is not present in the provided text. It is relevant because it addresses both parts of the question. It is incorrect because the gold answer reveals the specific voluntary turnover rate (5.8%) and a more precise total headcount (140,800), which the system failed to provide, likely due to limited retrieval, whereas the grading instructions require matching key facts of the gold answer."
+    },
+    {
+      "id": "Q35",
+      "question": "Comparing Apple's fiscal 2025 and Tesla's 2025 filings, which company spent more on research and development, and by how much?",
+      "type": "cross_document",
+      "difficulty": "hard",
+      "mode": "comparison",
+      "answer": "Neither the Apple excerpt nor the Tesla excerpt provides a specific dollar amount for research and development expenses in fiscal\u202f2025, so a comparison of which company spent more\u2014and by how much\u2014cannot be determined from the provided information.\u202f[1][3]",
+      "expected_pairs": [
+        [
+          "AAPL",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "AAPL",
+          "Item 7"
+        ],
+        [
+          "AAPL",
+          "Item 5"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 1"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 1.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": false,
+      "judge_reasoning": "The system correctly identified that Tesla's R&D figure was missing from the excerpts (faithful) and addressed the prompt by stating the comparison could not be made (relevant). However, it was incorrect because Apple's R&D figure ($34,550 million) was explicitly present in excerpt [1], whereas the gold answer provides full comparative figures for both companies."
+    },
+    {
+      "id": "Q36",
+      "question": "Rank Walmart, JPMorganChase, Apple, Johnson & Johnson, Tesla and ExxonMobil by headcount, largest to smallest, based on their most recent 10-K filings.",
+      "type": "cross_document",
+      "difficulty": "hard",
+      "mode": "comparison",
+      "answer": "The excerpts supplied do not contain any employee\u2011headcount figures for Walmart, JPMorgan\u202fChase, Apple, Johnson\u202f&\u202fJohnson, Tesla, or ExxonMobil. The Apple excerpt lists only directors\u202f[1]; the Johnson\u202f&\u202fJohnson excerpts provide only section headings and proxy\u2011statement references\u202f[3][4]; the JPMorgan\u202fChase excerpts present financial segment data but no headcount\u202f[5][6]; the Tesla excerpts give asset and income details but no employee totals\u202f[7][8]; the Walmart excerpts show store/unit counts, not employee numbers\u202f[9][10]; and the ExxonMobil excerpts describe retail\u2011fuel sites and share data, not staff counts\u202f[11][12]. Because none of the provided 10\u2011K excerpts include headcount information, a ranking of the six companies by employee count cannot be derived from the given material.",
+      "expected_pairs": [],
+      "retrieved_pairs": [
+        [
+          "AAPL",
+          "Item 16"
+        ],
+        [
+          "AAPL",
+          null
+        ],
+        [
+          "JNJ",
+          null
+        ],
+        [
+          "JNJ",
+          "Item 16"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "TSLA",
+          "Item 8"
+        ],
+        [
+          "TSLA",
+          "Item 8"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "WMT",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ]
+      ],
+      "retrieval_applicable": false,
+      "retrieval_hit": null,
+      "retrieval_recall": null,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system's answer is faithful because it correctly identifies that the provided excerpts do not contain employee headcount data (they contain financial statements, table of contents, or store counts). It is relevant because it directly addresses the impossibility of answering the question based on the constrained context. It is correct because, according to the grading instructions, when the necessary information is not present in the retrieved excerpts, the appropriate response is to decline to answer or state the information is unavailable, rather than fabricating a ranking."
+    },
+    {
+      "id": "Q37",
+      "question": "Among Apple, Tesla and JPMorganChase, which reported a year-over-year decline in net income in their most recent fiscal year?",
+      "type": "cross_document",
+      "difficulty": "hard",
+      "mode": "comparison",
+      "answer": "JPMorgan\u202fChase reported a year\u2011over\u2011year decline in net income, saying its 2025 net income of $57.0\u202fbillion was \u201cdown\u202f2%\u201d versus the prior year\u30103\u3011.  \n\nThe Apple excerpts provide operating\u2011income and net\u2011sales figures but do not include net\u2011income data, so a decline cannot be confirmed or refuted from the supplied text\u30101\u3011\u30102\u3011.  \n\nThe Tesla excerpts contain balance\u2011sheet items (assets, liabilities) and legal disclosures but contain no net\u2011income figures, so no year\u2011over\u2011year change can be determined from the provided information\u30105\u3011\u30106\u3011.",
+      "expected_pairs": [
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "JPM",
+          "Item 7"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "JPM",
+          "Item 15"
+        ],
+        [
+          "TSLA",
+          "Item 8"
+        ],
+        [
+          "TSLA",
+          "Item 8"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": true,
+      "retrieval_recall": 0.3333333333333333,
+      "faithful": true,
+      "relevant": true,
+      "correct": false,
+      "judge_reasoning": "The answer is faithful because it accurately reports JPMorganChase's decline based on the provided excerpt and correctly identifies that net income data is missing from the Apple and Tesla excerpts. It is relevant as it attempts to answer the question based on the available text. However, it is incorrect because the gold answer indicates that both Tesla and JPMorganChase declined, whereas the system only identified JPMorganChase and incorrectly stated that a decline could not be confirmed for Tesla due to missing data in the retrieved context (even though the gold answer provides the specific figures, implying the system failed to identify the correct entity among the three based on the ground truth)."
+    },
+    {
+      "id": "Q38",
+      "question": "Compare the scale of share repurchases at Apple and ExxonMobil in their most recent fiscal years.",
+      "type": "cross_document",
+      "difficulty": "medium",
+      "mode": "comparison",
+      "answer": "Apple repurchased a large amount of its own stock in its most recent fiscal year, buying back\u202f402\u202fmillion shares for about\u202f$89.3\u202fbillion in 2025\u202f[1]. The ExxonMobil excerpts do not contain any information about share repurchases for its most recent fiscal year, so a comparable scale cannot be determined from the provided data\u202f[3][4].",
+      "expected_pairs": [
+        [
+          "AAPL",
+          "Item 7"
+        ],
+        [
+          "XOM",
+          "Item 7"
+        ]
+      ],
+      "retrieved_pairs": [
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 5"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ],
+        [
+          "XOM",
+          "Item 16"
+        ]
+      ],
+      "retrieval_applicable": true,
+      "retrieval_hit": false,
+      "retrieval_recall": 0.0,
+      "faithful": true,
+      "relevant": true,
+      "correct": false,
+      "judge_reasoning": "The answer is faithful because it only claims what the retrieved excerpts support (Apple's buyback amount) and correctly notes the absence of ExxonMobil buyback data in the provided text. It is relevant as it addresses the comparison requested. However, it is incorrect because it fails to recognize that the gold answer contains specific data (180.1 million shares, $20 billion) for ExxonMobil, implying the information should have been available or cited, but the system falsely concluded the information was missing from the data; furthermore, the system omitted the crucial comparison details provided in the gold answer."
+    },
+    {
+      "id": "Q39",
+      "question": "How many iPhone units did Apple sell in fiscal 2025?",
+      "type": "unanswerable",
+      "difficulty": "hard",
+      "mode": "bullets",
+      "answer": "- **AAPL**: The provided excerpts only give iPhone net sales in dollar amounts ($209,586\u202fmillion for fiscal 2025) and do not disclose the number of iPhone units sold in fiscal 2025, so the unit count cannot be determined from this information [1][5].",
+      "expected_pairs": [],
+      "retrieved_pairs": [
+        [
+          "AAPL",
+          "Item 7"
+        ],
+        [
+          "AAPL",
+          "Item 7"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ],
+        [
+          "AAPL",
+          "Item 8"
+        ]
+      ],
+      "retrieval_applicable": false,
+      "retrieval_hit": null,
+      "retrieval_recall": null,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system correctly identified that the retrieved excerpts only contain dollar-denominated net sales figures and do not provide unit sales data. It accurately declined to answer the question about unit counts, which aligns with the gold answer stating the information is not disclosed."
+    },
+    {
+      "id": "Q40",
+      "question": "What was Tesla's market share of the Chinese electric vehicle market in 2025?",
+      "type": "unanswerable",
+      "difficulty": "hard",
+      "mode": "bullets",
+      "answer": "**TSLA**: The provided excerpts do not contain any information about Tesla\u2019s market share of the Chinese electric vehicle market in 2025. Consequently, that specific data cannot be determined from the given context.",
+      "expected_pairs": [],
+      "retrieved_pairs": [
+        [
+          "TSLA",
+          "Item 1"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 7"
+        ],
+        [
+          "TSLA",
+          "Item 1"
+        ],
+        [
+          "TSLA",
+          "Item 1"
+        ]
+      ],
+      "retrieval_applicable": false,
+      "retrieval_hit": null,
+      "retrieval_recall": null,
+      "faithful": true,
+      "relevant": true,
+      "correct": true,
+      "judge_reasoning": "The system correctly identified that the retrieved excerpts do not contain the specific market share data requested. It appropriately declined to fabricate a figure, matching the gold answer's determination that the information is not disclosed in the provided context."
+    }
+  ],
+  "errors": []
+}

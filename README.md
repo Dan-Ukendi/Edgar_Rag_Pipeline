@@ -4,7 +4,7 @@ Benchmarked RAG pipeline for SEC 10-K filings — configurable chunking/embeddin
 
 ## Status
 
-Phase 4 (containerization) complete. See project plan for the full phase breakdown.
+Phase 5 (evaluation set) complete. See project plan for the full phase breakdown.
 
 **Known corpus/parsing characteristics** (found during manual testing, worth remembering when writing eval questions in Phase 5):
 - Item-section tags on chunks are a best-effort heuristic (nearest preceding "Item N" heading). Some filings place their full financial statements or extended risk discussion in an appendix after their last numbered Item, so those chunks inherit that Item's label rather than the semantically obvious one (e.g. financial statements tagged "Item 16" in one filing). Retrieved *content* is still correct in these cases — only the section label is approximate.
@@ -13,6 +13,24 @@ Phase 4 (containerization) complete. See project plan for the full phase breakdo
 - Streamlit's markdown renderer treats text between two `$` signs as LaTeX math, which mangles answers/excerpts containing two or more dollar amounts. Fixed by escaping `$` before display in `ui/app.py` — doesn't affect the CLI or raw API JSON, which were never mangled.
 - Comparison questions can hit `top_k_per_company`'s shallow depth (default 2) — e.g. asking to compare two companies' revenue can retrieve one company's income-statement chunk but not the other's, and the model correctly says the figure isn't in the excerpts rather than guessing. A worthwhile Phase 6 sweep target if comparison quality matters.
 - Neither the official Qdrant nor Ollama Docker images include curl/wget, only bash — their `docker-compose.yml` healthchecks use bash's `/dev/tcp` pseudo-device for a plain TCP-port-open check instead.
+- Short factual sentences (e.g. an employee headcount buried in a "Human Capital" paragraph) can rank behind dense financial-statement boilerplate in cosine similarity, even at `top_k=8+` — a real embedding/chunking limitation the eval set caught, not a retrieval-logic bug. Worth a Phase 6 sweep target (chunk size, embedding model).
+- Building the eval set (Phase 5) surfaced and fixed two real bugs: company-mention detection missed "JPMorganChase" as one word (only had "JPMorgan Chase" with a space) and comparison-intent detection missed phrasings like "Rank X, Y and Z by..." or "which reported a decline" (`companies.py`). It also caught a structural regression: single-company questions asked without an explicit `ticker` were retrieving only `top_k_per_company` (2) chunks via the multi-company code path instead of the deeper `top_k` (5) a single-company query should get — fixed in `RagService.ask()`.
+
+## Evaluation
+
+`eval/eval_set.json` — 40 hand-written, source-verified Q&A pairs (every gold answer checked against the actual downloaded filing text) spanning all 6 companies, three question types (factual, multi-hop, cross-document comparison) plus 2 deliberately unanswerable questions. Ground truth for retrieval is `(ticker, item_section)` pairs parsed from a human-written section reference, not exact chunk IDs — chunk boundaries shift under Phase 6's chunking sweeps, so ID-pinned ground truth would silently break on every config except today's.
+
+```bash
+uv run scripts/run_eval.py --backend=groq   # or --backend=local, --limit=N for a quick subset
+```
+
+Scores three independent properties per question, using a Groq model (`qwen/qwen3.8-27b`) distinct from both app backends as judge — never self-grading:
+- **Retrieval hit** (programmatic): did any retrieved chunk match the expected `(ticker, item_section)`?
+- **Faithful** (LLM-judged): is every claim in the answer actually supported by what was retrieved?
+- **Relevant** (LLM-judged): does the answer address what was actually asked?
+- **Correct** (LLM-judged): does the answer match the gold answer's key facts (or, for unanswerable questions, correctly decline rather than fabricate)?
+
+Baseline (Groq backend, default config): 46% retrieval hit, 95% faithful, 98% relevant, 58% correct. The gap between "faithful" and "correct" is the story: the system rarely hallucinates, but a lot of the miss rate is retrieval not surfacing the right chunk in the first place — exactly what Phase 6's sweeps exist to improve on.
 
 ## Multi-company questions
 
@@ -124,7 +142,17 @@ scripts/
 ├── build_index.py          # run the full ingest pipeline
 ├── query_index.py           # manually query the index and inspect results
 ├── ask.py                    # end-to-end: retrieve -> generate a grounded, cited answer
-└── docker_ingest.py            # idempotent fetch+build step run by the `ingest` compose service
+├── docker_ingest.py            # idempotent fetch+build step run by the `ingest` compose service
+└── run_eval.py                  # runs eval/eval_set.json end to end, writes eval/results.json
+
+eval/
+├── eval_set.json           # 40 hand-written, source-verified Q&A pairs (ground truth)
+└── results.json            # latest run's per-question scores (generated)
+src/tenk_rag/eval/
+├── ground_truth.py         # parses expected_source -> (ticker, item_section) pairs
+├── judge.py                  # Groq LLM-judge: faithful / relevant / correct
+└── scorer.py                   # combines retrieval scoring + judge per question
+
 data/raw/                 # downloaded filings (gitignored, reproducible via fetch script)
 data/processed/           # generated artifacts (gitignored)
 tests/                    # test suite
